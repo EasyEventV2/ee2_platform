@@ -18,69 +18,75 @@ const FE_BRANCH = 'refs/heads/v0.1.0/master';
 const BE_BRANCH = 'refs/heads/v0.1.0/master';
 const PLATFORM_BRANCH = 'master';
 
-const log = (content) => {
-  console.log(`[${Date.now()}] ${JSON.stringify(content)}`);
+const Repo = {
+  FE: 'ee2_web_frontend',
+  BE: 'ee2_api',
+  PLATFORM: 'ee2_plaform',
+};
+
+const log = (repo, content) => {
+  console.log(`[${Date.now()}][${repo}] ${JSON.stringify(content)}`);
 };
 
 app.post('/hooks/frontend/deploy', (req, res) => {
   if (req.body.ref !== FE_BRANCH) {
-    log('Wrong branch');
+    log(Repo.FE, 'Wrong branch');
     res.send('Wrong branch').status(400);
     return;
   }
   res.send('PROCESSING...').status(200);
   const command = `cd ${FE_REPO_DIR} && . ./deploy.sh`;
-  log({ command });
+  log(Repo.FE, { command });
   exec(command, { shell: '/bin/bash' }, (error, stdout, stderr) => {
     if (error) {
-      log({ error });
-      log({ stdout });
-      log({ stderr });
+      log(Repo.FE, { error });
+      log(Repo.FE, { stdout });
+      log(Repo.FE, { stderr });
     } else {
-      log({ stdout });
-      log({ stderr });
+      log(Repo.FE, { stdout });
+      log(Repo.FE, { stderr });
     }
   });
 });
 
 app.post('/hooks/backend/deploy', (req, res) => {
   if (req.body.ref !== BE_BRANCH) {
-    log('Wrong branch');
+    log(Repo.FE, 'Wrong branch');
     res.send('Wrong branch').status(400);
     return;
   }
   res.send('PROCESSING...').status(200);
   const command = `cd ${BE_REPO_DIR} && . ./deploy.sh`;
-  log({ command });
+  log(Repo.FE, { command });
   exec(command, { shell: '/bin/bash' }, (error, stdout, stderr) => {
     if (error) {
-      log({ error });
-      log({ stdout });
-      log({ stderr });
+      log(Repo.FE, { error });
+      log(Repo.FE, { stdout });
+      log(Repo.FE, { stderr });
     } else {
-      log({ stdout });
-      log({ stderr });
+      log(Repo.FE, { stdout });
+      log(Repo.FE, { stderr });
     }
   });
 });
 
 app.post('/hooks/platform/deploy', (req, res) => {
   if (req.body.ref !== PLATFORM_BRANCH) {
-    log('Wrong branch');
+    log(Repo.FE, 'Wrong branch');
     res.send('Wrong branch').status(400);
     return;
   }
   res.send('PROCESSING...').status(200);
   const command = `cd ${PLATFORM_REPO_DIR} && . ./deploy.sh`;
-  log({ command });
+  log(Repo.FE, { command });
   exec(command, { shell: '/bin/bash' }, (error, stdout, stderr) => {
     if (error) {
-      log({ error });
-      log({ stdout });
-      log({ stderr });
+      log(Repo.FE, { error });
+      log(Repo.FE, { stdout });
+      log(Repo.FE, { stderr });
     } else {
-      log({ stdout });
-      log({ stderr });
+      log(Repo.FE, { stdout });
+      log(Repo.FE, { stderr });
     }
   });
 });
