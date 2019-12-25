@@ -16,7 +16,7 @@ const PLATFORM_REPO_DIR = path.resolve(__dirname, './');
 
 const FE_BRANCH = 'refs/heads/v0.1.0/master';
 const BE_BRANCH = 'refs/heads/v0.1.0/master';
-const PLATFORM_BRANCH = 'master';
+const PLATFORM_BRANCH = 'refs/heads/master';
 
 const Repo = {
   FE: 'ee2_web_frontend',
