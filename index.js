@@ -22,6 +22,8 @@ app.get('/hooks/frontend/deploy', (req, res) => {
   exec(command, (error, stdout, stderr) => {
     if (error) {
       log(error);
+      log(stdout);
+      log(stderr);
       res.send({ error }).status(400);
     } else {
       log(stdout);
