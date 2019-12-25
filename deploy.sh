@@ -19,9 +19,7 @@ npm install && \
 echo "OK" >> "$LOG_FILE" && \
 
 printf "$(timestamp) Restart pm2 process ......" >> "$LOG_FILE" && \
-pm2 stop "platform";
-pm2 del "platform";
-pm2 start index.js --name "platform" && \
+pm2 restart "platform" && \
 echo "OK" >> "$LOG_FILE" && \
 
 echo "$(timestamp) SUCCESS!" >> "$LOG_FILE"
