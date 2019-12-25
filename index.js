@@ -17,9 +17,9 @@ const log = (content) => {
 };
 
 app.get('/hooks/frontend/deploy', (req, res) => {
-  const command = `cd ${FE_REPO_DIR} && source deploy.sh`;
+  const command = `cd ${FE_REPO_DIR} && . ./deploy.sh`;
   log(command);
-  exec(command, (error, stdout, stderr) => {
+  exec(command, { shell: '/bin/bash' }, (error, stdout, stderr) => {
     if (error) {
       log(error);
       log(stdout);
