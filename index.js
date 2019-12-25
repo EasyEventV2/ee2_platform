@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { exec } = require('child_process');
 const path = require('path');
+const packageJson = require('./package.json');
 
 const app = express();
 const port = 6789;
@@ -97,5 +98,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`EE2 Platform is listening on port ${port}!`);
+  console.log(`[v${packageJson.version}] EE2 Platform is listening on port ${port}!`);
 });
