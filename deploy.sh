@@ -18,8 +18,4 @@ printf "$(timestamp) Install deps ............." >> "$LOG_FILE" && \
 npm install && \
 echo "OK" >> "$LOG_FILE" && \
 
-printf "$(timestamp) Restart pm2 process ......" >> "$LOG_FILE" && \
-pm2 restart "platform" && \
-echo "OK" >> "$LOG_FILE" && \
-
 echo "$(timestamp) SUCCESS!" >> "$LOG_FILE"
