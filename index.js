@@ -11,29 +11,35 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const FE_REPO_DIR = path.resolve(__dirname, '../ee2_web_frontend');
+const FE_BRANCH = 'refs/heads/v0.1.0/master';
 
 const log = (content) => {
   console.log(`[${Date.now()}] ${JSON.stringify(content)}`);
 };
 
-app.get('/hooks/frontend/deploy', (req, res) => {
+app.post('/hooks/frontend/deploy', (req, res) => {
+  if (req.body.ref !== FE_BRANCH) {
+    log('Wrong branch');
+    res.send('Wrong branch').status(400);
+    return;
+  }
+  res.send('PROCESSING...').status(200);
   const command = `cd ${FE_REPO_DIR} && . ./deploy.sh`;
-  log(command);
+  log({ command });
   exec(command, { shell: '/bin/bash' }, (error, stdout, stderr) => {
     if (error) {
-      log(error);
-      log(stdout);
-      log(stderr);
-      res.send({ error }).status(400);
+      log({ error });
+      log({ stdout });
+      log({ stderr });
     } else {
-      log(stdout);
-      log(stderr);
-      res.send('OK').status(200);
+      log({ stdout });
+      log({ stderr });
     }
   });
 });
 
 app.get('*', (req, res) => {
+  log({ body: req.body });
   res.send('OK');
 });
 
